@@ -2,4 +2,7 @@
 members = [
     "argparse",
     "hello-world",
+    "system/app",
+    "system/cli",
+    "system/math",
 ]

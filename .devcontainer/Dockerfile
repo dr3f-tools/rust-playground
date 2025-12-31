@@ -31,14 +31,14 @@ RUN apt update && apt install -y --no-install-recommends \
     # Cleanup
     && rm -rf /var/lib/apt/lists/*
 
-# Install rust
-RUN apt update && apt install -y --no-install-recommends \
-    rustc                           \
-    cargo                           \
-    # Add user in sudoer group
-    && adduser root sudo            \
-    # Cleanup
-    && rm -rf /var/lib/apt/lists/*
+# # Install rust
+# RUN apt update && apt install -y --no-install-recommends \
+#     rustc                           \
+#     cargo                           \
+#     # Add user in sudoer group
+#     && adduser root sudo            \
+#     # Cleanup
+#     && rm -rf /var/lib/apt/lists/*
 
 # Create the user
 ARG USERNAME=user
@@ -59,8 +59,18 @@ RUN userdel --remove ubuntu \
 USER $USERNAME
 ENV USER=$USERNAME
 
-# # Install Rust using rustup
-# RUN curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
+# Install rustup for the current user
+WORKDIR /home/$USERNAME
+RUN curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
 
-# # Add Cargo's bin directory to the PATH for non-interactive shells
-# ENV PATH="/home/${USERNAME}/.cargo/bin:${PATH}"
+# Add cargo/bin to PATH for this user
+ENV PATH="/home/${USERNAME}/.cargo/bin:${PATH}"
+
+# Install rustfmt and clippy
+RUN rustup component add rustfmt
+RUN rustup component add clippy
+
+# Verify installation
+RUN rustc --version
+RUN cargo --version
+RUN rustup --version

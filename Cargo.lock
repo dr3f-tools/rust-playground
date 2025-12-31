@@ -53,6 +53,14 @@ dependencies = [
 ]
 
 [[package]]
+name = "app"
+version = "0.1.0"
+dependencies = [
+ "cli",
+ "math",
+]
+
+[[package]]
 name = "argparse"
 version = "0.1.0"
 dependencies = [
@@ -100,6 +108,13 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "a1d728cc89cf3aee9ff92b05e62b19ee65a02b5702cff7d5a377e32c6ae29d8d"
 
 [[package]]
+name = "cli"
+version = "0.1.0"
+dependencies = [
+ "clap",
+]
+
+[[package]]
 name = "colorchoice"
 version = "1.0.4"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -120,6 +135,10 @@ name = "is_terminal_polyfill"
 version = "1.70.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "a6cb138bb79a146c1bd460005623e142ef0181e3d0219cb493e02f7d08a35695"
+
+[[package]]
+name = "math"
+version = "0.1.0"
 
 [[package]]
 name = "once_cell_polyfill"
