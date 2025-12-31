@@ -1,0 +1,36 @@
+{
+	"name": "rust-playground",
+	"build": {
+		"dockerfile": "Dockerfile",
+		"args": {
+			"USERNAME": "${localEnv:USER}"
+		}
+	},
+	"privileged": true,
+	"runArgs": [
+		"--net=host",
+		"-v",
+		"/dev:/dev",
+		"-v",
+		"${localEnv:HOME}/.gitconfig:/home/${localEnv:USER}/.gitconfig",
+		"-v",
+		"${localEnv:HOME}/.ssh:/home/${localEnv:USER}/.ssh",
+		"-v",
+		"/tmp/.X11-unix:/tmp/.X11-unix",
+		"--name",
+		"rust-playground"
+	],
+	"containerEnv": {
+		"DISPLAY": "${localEnv:DISPLAY}"
+	},
+	"remoteUser": "${localEnv:USER}",
+	"customizations": {
+		"vscode": {
+			"extensions": [
+				"ms-vscode.cpptools-extension-pack",
+				"mhutchie.git-graph",
+				"streetsidesoftware.code-spell-checker"
+			]
+		}
+	}
+}
